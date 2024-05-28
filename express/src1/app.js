@@ -22,16 +22,41 @@ const Playlist=new mongoose.model("Playlist", playlistSchema);
 
 const createDocument=async ()=>{
      try{
-           const reactplaylist=new Playlist({
-            name:"node",
-            ctype:"backend",
+           const react=new Playlist({
+            name:"react js",
+            ctype:"front end",
             vedio:30,
              flag:true
            })
-           const result=await reactplaylist.save();
+           const  node=new Playlist({
+            name:"node js",
+            ctype:"back end",
+            vedio:30,
+             flag:true
+           })
+           const database=new Playlist({
+             name:"mongodb",
+             ctype:"backend",
+             vedio:4,
+             flag:true
+           })
+           const database2=new Playlist({
+            name:"mongoees",
+            ctype:"backend",
+            vedio:4,
+            flag:true
+          })
+           const result=await Playlist.insertMany([react, node, database, database2]);
 
      }catch(err){
         console.log(err);
      }
 }
 createDocument();
+
+
+const getdocument= async ()=>{
+       const result =await Playlist.find({ctype:{$in:["backend","front end"]}});
+       console.log(result);
+}
+getdocument();
